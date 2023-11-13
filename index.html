@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>3D Spheres</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Open Sans";
+      line-height: 1.618em;
+      color: #444;
+      overflow-y: scroll;
+      background: url('https://images.unsplash.com/photo-1502134249126-9f3755a50d78?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') center/cover no-repeat;
+      background-color: rgba(0, 0, 0, 0.8);
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    .wrapper {
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .perspective1, .perspective2, .perspective3, .perspective4, .perspective5 {
+      perspective: 2000px;
+      position: relative;
+      perspective-origin: 50% 50%;
+    }
+
+    .perspective2 {
+      perspective: 2000px;
+      position: absolute;
+      left: 35%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .perspective3 {
+      perspective: 2000px;
+      position: absolute;
+      left: 50%;
+      top: 80%;
+      transform: translate(-50%, -50%);
+    }
+
+    .perspective4 {
+      perspective: 2000px;
+      position: absolute;
+      left: 65%; /* Adjust this value to position it on the right side of perspective1 */
+      top: 50%; /* Adjust this value to position it vertically on perspective1 */
+      transform: translate(-50%, -50%);
+    }
+
+    .perspective5 {
+      perspective: 2000px;
+      position: absolute;
+      left: 50%;
+      top: 10%;
+      transform: translate(-50%, 0);
+    }
+
+    
+
+    .sphere1, .sphere2, .sphere3, .sphere4,.sphere5  {
+      position: relative;
+      width: 200px;
+      height: 200px;
+      transform-style: preserve-3d;
+      transition: transform 0.5s ease;
+    }
+
+    .sphere1 div, .sphere2 div, .sphere3 div, .sphere4 div , .sphere5 div{
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      opacity: 0.95;
+      border-radius: 50%;
+    }
+
+    .front1 {
+      transform: translateZ(100px);
+      background-image: url('logo.png');
+    }
+
+    .front2 {
+      transform: translateZ(100px);
+      background-image: url('SI.png');
+    }
+
+    .front3 {
+      transform: translateZ(100px);
+      background-image: url('Platform.png');
+    }
+
+    .front4 {
+      transform: translateZ(100px);
+      background-image: url('Win.png');
+    }
+
+    .front5 {
+      transform: translateZ(100px);
+      background-image: url('SMS.png');
+    }
+
+    .back1 {
+      transform: rotateY(180deg) translateZ(100px);
+      background-image: url('logo.png');
+    }
+
+    .back2 {
+      transform: rotateY(180deg) translateZ(100px);
+      background-image: url('SI.png');
+    }
+
+    .back3 {
+      transform: rotateY(180deg) translateZ(100px);
+      background-image: url('Platform.png');
+    }
+
+    .back4 {
+      transform: rotateY(180deg) translateZ(100px);
+      background-image: url('Win.png');
+    }
+
+    .back5 {
+      transform: rotateY(180deg) translateZ(100px);
+      background-image: url('SMS.png');
+    }
+
+    .left1 {
+      transform: rotateY(-90deg) translateZ(100px);
+      background-image: url('logo.png');
+    }
+
+    .left2 {
+      transform: rotateY(-90deg) translateZ(100px);
+      background-image: url('SI.png');
+    }
+
+    .left3 {
+      transform: rotateY(-90deg) translateZ(100px);
+      background-image: url('Platform.png');
+    }
+
+    .left4 {
+      transform: rotateY(-90deg) translateZ(100px);
+      background-image: url('Win.png');
+    }
+
+    .left5 {
+      transform: rotateY(-90deg) translateZ(100px);
+      background-image: url('SNS.png');
+    }
+
+    .right1 {
+      transform: rotateY(90deg) translateZ(100px);
+      background-image: url('logo.png');
+    }
+
+    .right2 {
+      transform: rotateY(90deg) translateZ(100px);
+      background-image: url('SI.png');
+    }
+
+    .right3 {
+      transform: rotateY(90deg) translateZ(100px);
+      background-image: url('Platform.png');
+    }
+
+    .right4 {
+      transform: rotateY(90deg) translateZ(100px);
+      background-image: url('Win.png');
+    }
+
+    .right5 {
+      transform: rotateY(90deg) translateZ(100px);
+      background-image: url('SMS.png');
+    }
+
+    .top1 {
+      transform: rotateX(90deg) translateZ(100px);
+      background-image: url('logo.png');
+    }
+
+    .top2 {
+      transform: rotateX(90deg) translateZ(100px);
+      background-image: url('SI.png');
+    }
+
+    .top3 {
+      transform: rotateX(90deg) translateZ(100px);
+      background-image: url('Platform.png');
+    }
+
+    .top4 {
+      transform: rotateX(90deg) translateZ(100px);
+      background-image: url('Win.png');
+    }
+
+    .top5 {
+      transform: rotateX(90deg) translateZ(100px);
+      background-image: url('SMS.png');
+    }
+
+    .bottom1 {
+      transform: rotateX(-90deg) translateZ(100px);
+      background-image: url('logo.png');
+    }
+
+    .bottom2 {
+      transform: rotateX(-90deg) translateZ(100px);
+      background-image: url('SI.png');
+    }
+
+    .bottom3 {
+      transform: rotateX(-90deg) translateZ(100px);
+      background-image: url('Platform.png');
+    }
+
+    .bottom4 {
+      transform: rotateX(-90deg) translateZ(100px);
+      background-image: url('Win.png');
+    }
+    .bottom5 {
+      transform: rotateX(-90deg) translateZ(100px);
+      background-image: url('SMS.png');
+    }
+
+    .sphere2 {
+      margin-left: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrapper">
+    <div class="perspective1">
+      <div class="sphere1" id="sphere1">
+        <div class="front1"></div>
+        <div class="back1"></div>
+        <div class="top1"></div>
+        <div class="bottom1"></div>
+        <div class="left1"></div>
+        <div class="right1"></div>
+      </div>
+    </div>
+
+    <div class="perspective2">
+      <div class="sphere2" id="sphere2">
+        <div class="front2"></div>
+        <div class="back2"></div>
+        <div class="top2"></div>
+        <div class="bottom2"></div>
+        <div class="left2"></div>
+        <div class="right2"></div>
+      </div>
+    </div>
+
+    <div class="perspective3">
+      <div class="sphere3" id="sphere3">
+        <div class="front3"></div>
+        <div class="back3"></div>
+        <div class="top3"></div>
+        <div class="bottom3"></div>
+        <div class="left3"></div>
+        <div class="right3"></div>
+      </div>
+    </div>
+
+    <div class="perspective4">
+      <div class="sphere4" id="sphere4">
+        <div class="front4"></div>
+        <div class="back4"></div>
+        <div class="top4"></div>
+        <div class="bottom4"></div>
+        <div class="left4"></div>
+        <div class="right4"></div>
+      </div>
+    </div>
+
+    <div class="perspective5">
+      <div class="sphere5" id="sphere5">
+        <div class="front5"></div>
+        <div class="back5"></div>
+        <div class="top5"></div>
+        <div class="bottom5"></div>
+        <div class="left5"></div>
+        <div class="right5"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let rotationX = 0;
+    let rotationY = 0;
+
+    function rotateSpheres() {
+      rotationY += 0.1;
+      rotationX += 0.1;
+
+      document.getElementById('sphere1').style.transform = `rotateY(${rotationY}deg) rotateX(${rotationX}deg)`;
+      document.getElementById('sphere2').style.transform = `rotateY(${rotationY}deg) rotateX(${rotationX}deg)`;
+      document.getElementById('sphere3').style.transform = `rotateY(${rotationY}deg) rotateX(${rotationX}deg)`;
+      document.getElementById('sphere4').style.transform = `rotateY(${rotationY}deg) rotateX(${rotationX}deg)`;
+      document.getElementById('sphere5').style.transform = `rotateY(${rotationY}deg) rotateX(${rotationX}deg)`;
+    }
+
+    // Set the rotation interval
+    setInterval(rotateSpheres, 50);
+  </script>
+</body>
+
+</html>
